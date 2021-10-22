@@ -10,6 +10,7 @@ public class onlinePayment implements TaxPayment {
 		@Override
 		public double interest(double amount, int months) {
 			return amount * months * MONTHLY_INTEREST;
+			
 		}
 
 		@Override

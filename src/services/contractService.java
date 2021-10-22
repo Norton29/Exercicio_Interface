@@ -21,10 +21,14 @@ public class contractService {
 
 		
 		public void processContract( Contract contract, int months) {
-			double basicQuota =contract.getTotalValue() / months;
+			double MONTHLY_INTEREST = 0.01;
 			for(int i =1; i<=months; i++) {
-				double uptadeQuota = basicQuota + taxpayment.interest(basicQuota, i);
+				double basicQuota =contract.getTotalValue() / months;
+				double uptadeQuota = basicQuota * Math.pow((1+ MONTHLY_INTEREST ), i);
+				
+				//double uptadeQuota = basicQuota + taxpayment.interest(basicQuota, i);
 				double finalQuota = uptadeQuota + taxpayment.paymenteFee(uptadeQuota);
+							
 				Date dueDate = addMonths(contract.getDate(), i);
 				contract.getInstallments().add(new Installment(dueDate, finalQuota));
 				
